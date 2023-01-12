@@ -49,7 +49,19 @@ class Person {
     this.age = age
     this.stomach = []
   }
-  
+  eat(edible){
+    if(this.stomach.length < 10){
+      this.stomach.push(edible);
+
+    }
+  }
+
+  poop(){
+    this.stomach = []
+  }
+  toString(){
+    return `${this.name} is this ${this.age}`
+  }
 }
 
 /*
@@ -67,7 +79,29 @@ class Person {
 */
 
 class Car {
-  
+ constructor(model, milesPerGallon){
+  this.model = model
+  this.milesPerGallon = milesPerGallon
+  this.tank = 0
+  this.odometer = 0
+
+}
+  fill(gallons){
+    this.tank = this.tank + gallons
+  }
+
+
+  drive(dist){
+    const drivableMiles = this.tank * this.milesPerGallon;
+    if(dist <= drivableMiles ){
+      this.odometer = this.odometer + dist
+      this.tank = this.tank - (dist / this.milesPerGallon)
+    }else{
+      this.odometer = this.odometer + drivableMiles
+      this.tank = 0
+      return `i ran out of gas at ${this.odometer} miles`
+    }
+  }
 }
 
 /*
@@ -84,6 +118,16 @@ class Car {
 */
 
 class Lambdasian {
+
+constructor(name, age, location){
+  this.name = name;
+  this.age = age;
+  this.location = location;
+}
+speak(){
+  return `hello my name is  ${this.name}, i am ${this.age} and live in ${this.location}.`
+}
+
   
 }
 
@@ -102,8 +146,20 @@ class Lambdasian {
         + `grade` receives a `student` object and a `subject` string as arguments and returns '{student.name} receives a perfect score on {subject}'
 */
 
-class Instructor {
-
+class Instructor extends Lambdasian{
+constructor({name, age, location, specialty, favLang, catchPhrase}){
+  super(name, age, location, specialty, favLang, catchPhrase)
+    this.specialty = specialty;
+    this.favLang = favLang;
+    this.catchPhrase = catchPhrase;
+ 
+}
+demo(subject){
+  return `Today we are learning about ${subject}`
+}
+grade(student, subject){
+return `${student.name} receives a perfect score on ${subject}`
+}
 }
 
 /*
